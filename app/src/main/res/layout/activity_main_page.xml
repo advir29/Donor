@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.linka.donor.MainPage">
+    tools:context="com.example.linka.donor.MainPage"
+    android:id="@+id/drawerLayout">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Main Page"
+                android:id="@+id/textView"
+                android:layout_gravity="center_vertical"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                />
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="209dp"
+        android:layout_height="match_parent"
+        app:menu="@menu/menu"
+        android:layout_gravity="start"></android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

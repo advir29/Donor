@@ -13,6 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string-array name="blood_group">
         <item>A+</item>
         <item>A-</item>
