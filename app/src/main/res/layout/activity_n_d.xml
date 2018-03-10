@@ -4,26 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.linka.donor.MainPage"
+    tools:context="com.example.linka.donor.nD"
     android:id="@+id/drawerLayout">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width = "match_parent"
-        android:layout_height = "match_parent">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-    </LinearLayout>
-
+    </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="209dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu"></android.support.design.widget.NavigationView>
-
 </android.support.v4.widget.DrawerLayout>

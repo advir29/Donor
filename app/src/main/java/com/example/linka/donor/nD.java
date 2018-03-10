@@ -8,20 +8,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
 
-public class MainPage extends AppCompatActivity {
+public class nD extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
     NavigationView navigation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
-
+        setContentView(R.layout.activity_n_d);
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
@@ -34,35 +29,34 @@ public class MainPage extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id){
                     case R.id.home: {
-                        Intent in = new Intent(MainPage.this, MainPage.class);
+                        Intent in = new Intent(nD.this, MainPage.class);
                         startActivity(in);
                         break;
                     }case R.id.search:{
-                        Intent in= new Intent(MainPage.this, Search.class);
+                        Intent in= new Intent(nD.this, Search.class);
                         startActivity(in);break;
                     }case R.id.history:{
-                        Intent in=new Intent(MainPage.this, History.class);
+                        Intent in=new Intent(nD.this, History.class);
                         startActivity(in);break;
                     }case R.id.transfer:{
-                        Intent in= new Intent(MainPage.this, Transfer.class);
+                        Intent in= new Intent(nD.this, Transfer.class);
                         startActivity(in);break;
                     }case R.id.withdraw:{
-                        Intent in= new Intent(MainPage.this, Withdraw.class);
+                        Intent in= new Intent(nD.this, Withdraw.class);
                         startActivity(in);break;
                     }case R.id.logout:{
-                        Intent in= new Intent(MainPage.this, Login.class);
+                        Intent in= new Intent(nD.this, Login.class);
                         startActivity(in);break;
                     }}
                 return false;
             }
         });
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                if(mToggle.onOptionsItemSelected(item)){
+                    return true;
+                }
+                return super.onOptionsItemSelected(item);
+            }
 }

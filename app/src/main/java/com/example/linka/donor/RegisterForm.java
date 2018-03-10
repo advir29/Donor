@@ -1,10 +1,12 @@
 package com.example.linka.donor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -13,6 +15,7 @@ public class RegisterForm extends AppCompatActivity implements AdapterView.OnIte
     RadioGroup rg;
     RadioButton rb;
     String gen = "null";
+    public Button launch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,15 @@ public class RegisterForm extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        launch = findViewById(R.id.subButton);
+        launch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent launch1 = new Intent (RegisterForm.this, MainPage.class);
+                startActivity(launch1);
+            }
+        });
     }
     public void rbClick (View view){
         int radioButtonId = rg.getCheckedRadioButtonId();
