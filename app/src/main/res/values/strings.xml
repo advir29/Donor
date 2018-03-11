@@ -15,7 +15,7 @@
     </string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string-array name="blood_group">
+    <array name="blood_group">
         <item>A+</item>
         <item>A-</item>
         <item>B+</item>
@@ -25,5 +25,5 @@
         <item>O+</item>
         <item>O-</item>
         <item>Bombay type</item>
-    </string-array>
+    </array>
 </resources>
