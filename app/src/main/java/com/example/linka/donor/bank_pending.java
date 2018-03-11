@@ -49,7 +49,7 @@ public class bank_pending extends AppCompatActivity {
                     }case R.id.bank_check:{
                         Intent in= new Intent(bank_pending.this, bank_checkInventory.class);
                         startActivity(in);break;
-                    }case R.id.logout:{
+                    }case R.id.logout2:{
                         Intent in= new Intent(bank_pending.this, Login.class);
                         startActivity(in);break;
                     }}

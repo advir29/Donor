@@ -57,7 +57,7 @@ public class bank_DispenseBlood extends AppCompatActivity {
                         startActivity(in);
                         break;
                     }
-                    case R.id.logout: {
+                    case R.id.logout2: {
                         Intent in = new Intent(bank_DispenseBlood.this, Login.class);
                         startActivity(in);
                         break;

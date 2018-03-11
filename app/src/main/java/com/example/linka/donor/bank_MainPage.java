@@ -49,7 +49,7 @@ public class bank_MainPage extends AppCompatActivity {
                     }case R.id.bank_check:{
                         Intent in= new Intent(bank_MainPage.this, bank_checkInventory.class);
                         startActivity(in);break;
-                    }case R.id.logout:{
+                    }case R.id.logout2:{
                         Intent in= new Intent(bank_MainPage.this, Login.class);
                         startActivity(in);break;
                     }}

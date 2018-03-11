@@ -15,7 +15,7 @@
     <item android:id="@+id/bank_check"
         android:icon="@drawable/check_inventory"
         android:title="Check Inventory"></item>
-    <item android:id="@+id/bank_logout"
+    <item android:id="@+id/logout2"
         android:icon="@drawable/logout"
         android:title="Log Out"></item>
 </menu>
