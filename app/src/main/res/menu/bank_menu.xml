@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bank_home"
+        android:icon="@drawable/home"
+        android:title="Home"></item>
+    <item android:id="@+id/bank_pending"
+        android:icon="@drawable/pending"
+        android:title="Pending Donations"></item>
+    <item android:id="@+id/bank_start"
+        android:icon="@drawable/in"
+        android:title="Start Donation"></item>
+    <item android:id="@+id/bank_dispense"
+        android:icon="@drawable/transfer"
+        android:title="Dispense Blood"></item>
+    <item android:id="@+id/bank_check"
+        android:icon="@drawable/check_inventory"
+        android:title="Check Inventory"></item>
+    <item android:id="@+id/bank_logout"
+        android:icon="@drawable/logout"
+        android:title="Log Out"></item>
+</menu>

@@ -33,7 +33,13 @@
         <activity android:name=".pD" />
         <activity android:name=".Transfer" />
         <activity android:name=".Withdraw" />
-        <activity android:name=".Popup"></activity>
+        <activity android:name=".Popup" />
+        <activity android:name=".bank_register" />
+        <activity android:name=".bank_MainPage" />
+        <activity android:name=".bank_pending" />
+        <activity android:name=".bank_startDonation" />
+        <activity android:name=".bank_DispenseBlood" />
+        <activity android:name=".bank_checkInventory"></activity>
     </application>
 
 </manifest>
