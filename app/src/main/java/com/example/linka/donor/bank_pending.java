@@ -22,12 +22,12 @@ public class bank_pending extends AppCompatActivity {
     }
 
     private void startDrawer() {
-        mDrawerLayout = findViewById(R.id.drawerLayout);
+        mDrawerLayout = findViewById(R.id.drawerLayout2);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigation = findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation2);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
