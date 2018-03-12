@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class bank_checkInventory extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -19,6 +21,7 @@ public class bank_checkInventory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_check_inventory);
         startDrawer();
+
     }
 
     private void startDrawer() {
@@ -35,8 +38,7 @@ public class bank_checkInventory extends AppCompatActivity {
                 switch(id){
                     case R.id.bank_home: {
                         Intent in = new Intent(bank_checkInventory.this, bank_MainPage.class);
-                        startActivity(in);
-                        break;
+                        startActivity(in);break;
                     }case R.id.bank_pending:{
                         Intent in= new Intent(bank_checkInventory.this, bank_pending.class);
                         startActivity(in);break;
@@ -50,6 +52,7 @@ public class bank_checkInventory extends AppCompatActivity {
                         Intent in= new Intent(bank_checkInventory.this, bank_checkInventory.class);
                         startActivity(in);break;
                     }case R.id.logout2:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(bank_checkInventory.this, Login.class);
                         startActivity(in);break;
                     }}

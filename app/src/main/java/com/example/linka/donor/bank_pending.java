@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class bank_pending extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -50,6 +52,7 @@ public class bank_pending extends AppCompatActivity {
                         Intent in= new Intent(bank_pending.this, bank_checkInventory.class);
                         startActivity(in);break;
                     }case R.id.logout2:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(bank_pending.this, Login.class);
                         startActivity(in);break;
                     }}

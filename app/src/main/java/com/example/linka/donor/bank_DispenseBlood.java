@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class bank_DispenseBlood extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -58,6 +60,7 @@ public class bank_DispenseBlood extends AppCompatActivity {
                         break;
                     }
                     case R.id.logout2: {
+                        FirebaseAuth.getInstance().signOut();
                         Intent in = new Intent(bank_DispenseBlood.this, Login.class);
                         startActivity(in);
                         break;

@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class nD extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -45,6 +47,7 @@ public class nD extends AppCompatActivity {
                         Intent in= new Intent(nD.this, Withdraw.class);
                         startActivity(in);break;
                     }case R.id.logout:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(nD.this, Login.class);
                         startActivity(in);break;
                     }}

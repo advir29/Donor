@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainPage extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -50,6 +52,7 @@ public class MainPage extends AppCompatActivity {
                         Intent in= new Intent(MainPage.this, Withdraw.class);
                         startActivity(in);break;
                     }case R.id.logout:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(MainPage.this, Login.class);
                         startActivity(in);break;
                     }}
@@ -64,5 +67,10 @@ public class MainPage extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

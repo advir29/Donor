@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class pD extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
@@ -47,6 +49,7 @@ public class pD extends AppCompatActivity {
                         Intent in= new Intent(pD.this, Withdraw.class);
                         startActivity(in);break;
                     }case R.id.logout:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(pD.this, Login.class);
                         startActivity(in);break;
                     }}

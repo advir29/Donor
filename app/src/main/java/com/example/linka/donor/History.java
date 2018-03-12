@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class History extends AppCompatActivity {
     ImageButton addButton;
     DrawerLayout mDrawerLayout;
@@ -58,6 +60,7 @@ public class History extends AppCompatActivity {
                         Intent in= new Intent(History.this, Withdraw.class);
                         startActivity(in);break;
                     }case R.id.logout:{
+                        FirebaseAuth.getInstance().signOut();
                         Intent in= new Intent(History.this, Login.class);
                         startActivity(in);break;
                     }}

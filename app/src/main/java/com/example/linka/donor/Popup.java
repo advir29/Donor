@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Popup extends AppCompatActivity {
     Button nDo, pDo;
     DrawerLayout mDrawerLayout;
@@ -73,6 +75,7 @@ public class Popup extends AppCompatActivity {
                         break;
                     }
                     case R.id.logout: {
+                        FirebaseAuth.getInstance().signOut();
                         Intent in = new Intent(Popup.this, Login.class);
                         startActivity(in);
                         break;

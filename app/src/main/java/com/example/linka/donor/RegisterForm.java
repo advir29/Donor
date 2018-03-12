@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,6 +27,7 @@ public class RegisterForm extends AppCompatActivity {
     EditText first_name, last_name, height, weight, age;
     public Button launch;
     DatabaseReference db;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,6 @@ public class RegisterForm extends AppCompatActivity {
         height=findViewById(R.id.ht);
         weight=findViewById(R.id.wt);
         age=findViewById(R.id.age);
-
         blood_gp=findViewById(R.id.b_group);
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +66,10 @@ public class RegisterForm extends AppCompatActivity {
         blood_gp=findViewById(R.id.b_group);
         String b_gp=blood_gp.getSelectedItem().toString();
         if(!TextUtils.isEmpty(f_name)&&!TextUtils.isEmpty(l_name)&&!TextUtils.isEmpty(ht)&&!TextUtils.isEmpty(wt)&&!TextUtils.isEmpty(ag)&&!TextUtils.isEmpty(gender)){
-            String id=db.push().getKey().toString();
+            String id=mAuth.getInstance().getCurrentUser().getUid();
             b_group b_gup=new b_group(f_name,l_name,htt,wtt,agg,gender,b_gp);
             try{
-                db.child(id).setValue(b_gup);
+                db.child("client").child(id).setValue(b_gup);
                 startActivity(new Intent(RegisterForm.this, MainPage.class));
             }catch (Exception e){
                 Toast.makeText(this,"Something Went Wrong. Try again.",Toast.LENGTH_SHORT).show();
@@ -75,5 +77,10 @@ public class RegisterForm extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Please fill all the required fields.",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
