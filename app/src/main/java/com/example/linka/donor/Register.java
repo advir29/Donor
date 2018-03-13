@@ -44,8 +44,6 @@ public class Register extends AppCompatActivity {
                 startActivity(new Intent(Register.this, bank_register.class));
             }
         });
-
-
         submit = findViewById(R.id.reg);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,5 +69,10 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
