@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class bank_register extends AppCompatActivity {
     Button bank;
@@ -21,6 +22,7 @@ public class bank_register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_register);
+        db=FirebaseDatabase.getInstance().getReference();
         bank=findViewById(R.id.bank_sub);
         bank_name=findViewById(R.id.bank_name);
         add1=findViewById(R.id.add1);
@@ -42,9 +44,10 @@ public class bank_register extends AppCompatActivity {
         String c_name=city_name.getText().toString().trim();
         String d_name=district_name.getText().toString().trim();
         String s_name=state_name.getText().toString().trim();
+        bank_inventory bi= new bank_inventory(0,0,0,0,0,0,0,0,0);
         if(!TextUtils.isEmpty(b_name)&&!TextUtils.isEmpty(ad1)&&!TextUtils.isEmpty(c_name)&&!TextUtils.isEmpty(d_name)&&!TextUtils.isEmpty(s_name)){
             String id=mAuth.getInstance().getCurrentUser().getUid();
-            bank bb=new bank(b_name,ad1,c_name,d_name,s_name);
+            bank bb=new bank(b_name,ad1,c_name,d_name,s_name,bi);
             try{
                 db.child("blood_bank").child(id).setValue(bb);
                 startActivity(new Intent(bank_register.this, bank_MainPage.class));

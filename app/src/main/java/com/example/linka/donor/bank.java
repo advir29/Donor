@@ -5,41 +5,47 @@ package com.example.linka.donor;
  */
 
 public class bank {
-    String bank_name;
-    String add1;
-    String city_name;
-    String district_name;
-    String state_name;
+    String bname;
+    String add_l;
+    String city_l;
+    String district_l;
+    String state_l;
+    bank_inventory inventory;
 
     public bank(){
 
     }
 
-    public bank(String bank_name, String add1, String city_name, String district_name, String state_name) {
-        this.bank_name = bank_name;
-        this.add1 = add1;
-        this.city_name = city_name;
-        this.district_name = district_name;
-        this.state_name = state_name;
+    public bank(String bname, String add_l, String city_l, String district_l, String state_l, bank_inventory inventory) {
+        this.bname = bname;
+        this.add_l = add_l;
+        this.city_l = city_l;
+        this.district_l = district_l;
+        this.state_l = state_l;
+        this.inventory = inventory;
     }
 
-    public String getBank_name() {
-        return bank_name;
+    public String getBname() {
+        return bname;
     }
 
-    public String getAdd1() {
-        return add1;
+    public String getAdd_l() {
+        return add_l;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public String getCity_l() {
+        return city_l;
     }
 
-    public String getDistrict_name() {
-        return district_name;
+    public String getDistrict_l() {
+        return district_l;
     }
 
-    public String getState_name() {
-        return state_name;
+    public String getState_l() {
+        return state_l;
+    }
+
+    public bank_inventory getInventory() {
+        return inventory;
     }
 }

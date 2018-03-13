@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Register extends AppCompatActivity {
     String email, password;
     EditText emailTxt,pwTxt;
-    TextView signIn,jump;
+    TextView signIn;
     private FirebaseAuth mAuth;
     public Button submit;
     @Override
@@ -35,13 +35,6 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Register.this, Login.class));
-            }
-        });
-        jump=findViewById(R.id.jump);
-        jump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Register.this, bank_register.class));
             }
         });
         submit = findViewById(R.id.reg);
