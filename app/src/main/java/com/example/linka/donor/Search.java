@@ -9,8 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +32,8 @@ public class Search extends AppCompatActivity {
     NavigationView navigation;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
-    Spinner state,district,city;
-    String st,dt;
+    Spinner state,district,city,bd_group;
+    Button searchBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,9 @@ public class Search extends AppCompatActivity {
         state=findViewById(R.id.state);
         district=findViewById(R.id.district);
         city=findViewById(R.id.city);
+        bd_group=findViewById(R.id.bd_group);
+        searchBtn=findViewById(R.id.searchBtn);
+        String b_group;
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
@@ -77,9 +84,8 @@ public class Search extends AppCompatActivity {
         databaseReference.child("blood_bank").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
-                final List<String> stateN= new ArrayList<String>();
-                final List<String> distN= new ArrayList<String>();
-                final List<String> cityN= new ArrayList<String>();
+                List<String> stateN= new ArrayList<>();
+                stateN.add("All");
                 for(DataSnapshot bankSnapshot : dataSnapshot.getChildren()){
                     String stateName = bankSnapshot.child("state_l").getValue(String.class);
                     if(stateN.contains(stateName)){
@@ -88,56 +94,114 @@ public class Search extends AppCompatActivity {
                         stateN.add(stateName);
                     }
                 }
-                ArrayAdapter<String> stateAdapter= new ArrayAdapter<String>(Search.this,R.layout.support_simple_spinner_dropdown_item, stateN);
+                ArrayAdapter<String> stateAdapter= new ArrayAdapter<>(Search.this,R.layout.support_simple_spinner_dropdown_item, stateN);
                 stateAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 state.setAdapter(stateAdapter);
-                st= state.getSelectedItem().toString();
-                district.setOnClickListener(new View.OnClickListener() {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String st = state.getSelectedItem().toString();
+                databaseReference.child("blood_bank").orderByChild("state_l").equalTo(st).addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
-                        for(DataSnapshot bankSnapshot : dataSnapshot.getChildren()){
-                            String distName = bankSnapshot.child("dist_l").getValue(String.class);
-                            String stName = bankSnapshot.child("state_l").getValue(String.class);
-                            if(distN.contains(distName)){
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<String> districtN= new ArrayList<>();
+                        districtN.add("All");
+                        for(DataSnapshot bankSnapshot: dataSnapshot.getChildren()){
+                            String distName=bankSnapshot.child("district_l").getValue(String.class);
+                            if(districtN.contains(distName)){
 
                             }else{
-                                if(stName==st){
-                                    distN.add(distName);
-                                }
+                                districtN.add(distName);
                             }
                         }
-                        ArrayAdapter<String> distAdapter= new ArrayAdapter<String>(Search.this,R.layout.support_simple_spinner_dropdown_item, distN);
+                        ArrayAdapter<String> distAdapter= new ArrayAdapter<>(Search.this,R.layout.support_simple_spinner_dropdown_item, districtN);
                         distAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         district.setAdapter(distAdapter);
-                        dt= district.getSelectedItem().toString();
                     }
-                });
-                city.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        for(DataSnapshot bankSnapshot : dataSnapshot.getChildren()){
-                            String cityName = bankSnapshot.child("city_l").getValue(String.class);
-                            String dstName = bankSnapshot.child("dist_l").getValue(String.class);
-                            String staName = bankSnapshot.child("state_l").getValue(String.class);
-                            if(cityN.contains(cityName)){
+                    public void onCancelled(DatabaseError databaseError) {
 
-                            }else{
-                                if((staName==st)&&(dstName==dt)){
-                                    cityN.add(cityName);
-                                }
-                            }
-                        }
-                        ArrayAdapter<String> cityAdapter= new ArrayAdapter<String>(Search.this,R.layout.support_simple_spinner_dropdown_item, cityN);
-                        cityAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                        city.setAdapter(cityAdapter);
                     }
                 });
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
+        });
+        district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String dt=district.getSelectedItem().toString();
+                databaseReference.child("blood_bank").orderByChild("district_l").equalTo(dt).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<String> cityN= new ArrayList<>();
+                        cityN.add("All");
+                        for(DataSnapshot bankSnapshot: dataSnapshot.getChildren()){
+                            String distName=bankSnapshot.child("city_l").getValue(String.class);
+                            if(cityN.contains(distName)){
+
+                            }else{
+                                cityN.add(distName);
+                            }
+                        }
+                        ArrayAdapter<String> cityAdapter= new ArrayAdapter<>(Search.this,R.layout.support_simple_spinner_dropdown_item, cityN);
+                        cityAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                        city.setAdapter(cityAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+        bd_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String b_group=bd_group.getSelectedItem().toString();
+                String state_name=state.getSelectedItem().toString();
+                String district_name=state.getSelectedItem().toString();
+                String city_name=state.getSelectedItem().toString();
+                if(state_name.equalsIgnoreCase("all")){
+                    databaseReference.child("blood_bank").child("inventory").equalTo(b_group).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
         });
     }
     @Override
