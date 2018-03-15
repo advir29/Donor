@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <CheckedTextView
+            android:id="@+id/checkedTextView"
+            android:layout_width="261dp"
+            android:layout_height="454dp"
+            android:checked="false"
+            android:text="Pending Donations"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="35dp" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             if(dataSnapshot.exists()){
                                                 layout.setVisibility(View.INVISIBLE);
-                                                startActivity(new Intent(Login.this, MainPage.class));
+                                                startActivity(new Intent(Login.this, MainPage.class).putExtra("ID",id));
                                             }else{
                                                 databaseReference = FirebaseDatabase.getInstance().getReference();
                                                 databaseReference.child("blood_bank").child(id).addListenerForSingleValueEvent(new ValueEventListener() {

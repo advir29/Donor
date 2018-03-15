@@ -29,6 +29,7 @@ public class bank_register extends AppCompatActivity {
         city_name=findViewById(R.id.city_name);
         district_name=findViewById(R.id.district_name);
         state_name=findViewById(R.id.state_name);
+        bank_name.requestFocus();
         bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,10 +45,9 @@ public class bank_register extends AppCompatActivity {
         String c_name=city_name.getText().toString().trim();
         String d_name=district_name.getText().toString().trim();
         String s_name=state_name.getText().toString().trim();
-        bank_inventory bi= new bank_inventory(0,0,0,0,0,0,0,0,0);
         if(!TextUtils.isEmpty(b_name)&&!TextUtils.isEmpty(ad1)&&!TextUtils.isEmpty(c_name)&&!TextUtils.isEmpty(d_name)&&!TextUtils.isEmpty(s_name)){
             String id=mAuth.getInstance().getCurrentUser().getUid();
-            bank bb=new bank(b_name,ad1,c_name,d_name,s_name,bi);
+            bank bb=new bank(b_name,ad1,c_name,d_name,s_name,"0","0","0","0","0","0","0","0","0");
             try{
                 db.child("blood_bank").child(id).setValue(bb);
                 startActivity(new Intent(bank_register.this, bank_MainPage.class));

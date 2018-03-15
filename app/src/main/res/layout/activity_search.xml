@@ -8,8 +8,10 @@
     android:id="@+id/drawerLayout">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/parLay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <Spinner
             android:id="@+id/bd_group"
@@ -17,7 +19,7 @@
             android:layout_height="49dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:entries="@array/blood_group"
+            android:entries="@array/b_group"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -76,13 +78,9 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.667" />
+
     </android.support.constraint.ConstraintLayout>
 
-    <ListView
-        android:id="@+id/searchList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"></ListView>
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="209dp"

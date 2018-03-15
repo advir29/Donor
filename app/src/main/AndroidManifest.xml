@@ -42,7 +42,8 @@
         <activity android:name=".bank_startDonation" />
         <activity android:name=".bank_DispenseBlood" />
         <activity android:name=".bank_checkInventory" />
-        <activity android:name=".donor_admin"></activity>
+        <activity android:name=".donor_admin" />
+        <activity android:name=".search_result"></activity>
     </application>
 
 </manifest>

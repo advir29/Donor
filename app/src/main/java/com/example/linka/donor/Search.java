@@ -1,7 +1,9 @@
 package com.example.linka.donor;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,9 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -34,6 +39,9 @@ public class Search extends AppCompatActivity {
     DatabaseReference databaseReference;
     Spinner state,district,city,bd_group;
     Button searchBtn;
+    ConstraintLayout parLy;
+    private RecordAdapter adapter;
+    ListView search_result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,8 @@ public class Search extends AppCompatActivity {
         city=findViewById(R.id.city);
         bd_group=findViewById(R.id.bd_group);
         searchBtn=findViewById(R.id.searchBtn);
-        String b_group;
+        parLy=findViewById(R.id.parLay);
+        search_result=findViewById(R.id.search_result);
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
@@ -183,16 +192,110 @@ public class Search extends AppCompatActivity {
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String b_group=bd_group.getSelectedItem().toString();
-                String state_name=state.getSelectedItem().toString();
-                String district_name=state.getSelectedItem().toString();
-                String city_name=state.getSelectedItem().toString();
+            public void onClick(final View view) {
+                final String b_group=bd_group.getSelectedItem().toString();
+                final String state_name=state.getSelectedItem().toString();
+                final String district_name=state.getSelectedItem().toString();
+                final String city_name=state.getSelectedItem().toString();
                 if(state_name.equalsIgnoreCase("all")){
-                    databaseReference.child("blood_bank").child("inventory").equalTo(b_group).addValueEventListener(new ValueEventListener() {
+                    databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
+                                ArrayList<record> bankN=new ArrayList<>();
+                                String ava=recordSnapshot.child(b_group).getValue(String.class);
+                                if(ava==null){
+                                    continue;
+                                }
+                                int ava_l=Integer.parseInt(ava);
+                                if(ava_l>0){
+                                    record rec=new record(recordSnapshot.child("bname").getValue(String.class),recordSnapshot.child("add_l").getValue(String.class),
+                                            recordSnapshot.child("city_l").getValue(String.class),recordSnapshot.child("district_l").getValue(String.class),
+                                            recordSnapshot.child("state_l").getValue(String.class),ava);
+                                    bankN.add(rec);
+                                }
+                                adapter= new RecordAdapter(Search.this,bankN);
+                                search_result.setAdapter(adapter);
+                                startActivity(new Intent(Search.this,search_result.class));
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
+                        }
+                    });
+                }else if(state_name!="All"&&district_name.equalsIgnoreCase("All")){
+                    databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
+                                ArrayList<record> bankN=new ArrayList<>();
+                                String ava=recordSnapshot.child(b_group).getValue(String.class);
+                                String disava=recordSnapshot.child("state_l").getValue(String.class);
+                                int ava_l=Integer.parseInt(ava);
+                                if((ava_l>0)&&(state_name.equalsIgnoreCase(disava))){
+                                    record rec=new record(recordSnapshot.child("bname").getValue(String.class),recordSnapshot.child("add_l").getValue(String.class),
+                                            recordSnapshot.child("city_l").getValue(String.class),recordSnapshot.child("district_l").getValue(String.class),
+                                            recordSnapshot.child("state_l").getValue(String.class),ava);
+                                    bankN.add(rec);
+                                }
+                                adapter= new RecordAdapter(Search.this,bankN);
+                                search_result.setAdapter(adapter);
+                                startActivity(new Intent(Search.this,search_result.class));
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }else if(district_name!="null"&&city_name.equalsIgnoreCase("All")){
+                    databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
+                                ArrayList<record> bankN=new ArrayList<>();
+                                String ava=recordSnapshot.child(b_group).getValue(String.class);
+                                String stateava=recordSnapshot.child("state_l").getValue(String.class);
+                                String distava=recordSnapshot.child("district_l").getValue(String.class);
+                                int ava_l=Integer.parseInt(ava);
+                                if((ava_l>0)&&(state_name.equalsIgnoreCase(stateava))&&(district_name.equalsIgnoreCase(distava))){
+                                    record rec=new record(recordSnapshot.child("bname").getValue(String.class),recordSnapshot.child("add_l").getValue(String.class),
+                                            recordSnapshot.child("city_l").getValue(String.class),recordSnapshot.child("district_l").getValue(String.class),
+                                            recordSnapshot.child("state_l").getValue(String.class),ava);
+                                    bankN.add(rec);
+                                    adapter= new RecordAdapter(Search.this,bankN);
+                                    search_result.setAdapter(adapter);
+                                    startActivity(new Intent(Search.this,search_result.class));
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }else if(city_name!="All"){
+                    databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<record> bankN=new ArrayList<>();
+                            for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
+                                String ava=recordSnapshot.child(b_group).getValue(String.class);
+                                String stateava=recordSnapshot.child("state_l").getValue(String.class);
+                                String distava=recordSnapshot.child("district_l").getValue(String.class);
+                                String cityava=recordSnapshot.child("city_l").getValue(String.class);
+                                int ava_l=Integer.parseInt(ava);
+                                if((ava_l>0)&&(state_name.equalsIgnoreCase(stateava))&&(district_name.equalsIgnoreCase(distava))&&(city_name.equalsIgnoreCase(cityava))){
+                                    record rec=new record(recordSnapshot.child("bname").getValue(String.class),recordSnapshot.child("add_l").getValue(String.class),
+                                            recordSnapshot.child("city_l").getValue(String.class),recordSnapshot.child("district_l").getValue(String.class),
+                                            recordSnapshot.child("state_l").getValue(String.class),ava);
+                                    bankN.add(rec);
+                                }
+                            }
+                            adapter= new RecordAdapter(Search.this,bankN);
+                            search_result.setAdapter(adapter);
+                            startActivity(new Intent(Search.this,search_result.class));
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {

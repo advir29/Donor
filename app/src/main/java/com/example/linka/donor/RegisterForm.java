@@ -54,20 +54,18 @@ public class RegisterForm extends AppCompatActivity {
         String f_name = first_name.getText().toString().trim();
         String l_name = last_name.getText().toString().trim();
         String ht = height.getText().toString().trim();
-        int htt=Integer.parseInt(ht);
         String wt = weight.getText().toString().trim();
-        int wtt=Integer.parseInt(wt);
         String ag =age.getText().toString().trim();
-        int agg=Integer.parseInt(ag);
         rg=findViewById(R.id.rbGroup);
         int idSelect=rg.getCheckedRadioButtonId();
         rb=findViewById(idSelect);
         String gender=rb.getText().toString();
         blood_gp=findViewById(R.id.b_group);
         String b_gp=blood_gp.getSelectedItem().toString();
+        String uni="0";
         if(!TextUtils.isEmpty(f_name)&&!TextUtils.isEmpty(l_name)&&!TextUtils.isEmpty(ht)&&!TextUtils.isEmpty(wt)&&!TextUtils.isEmpty(ag)&&!TextUtils.isEmpty(gender)){
             String id=mAuth.getInstance().getCurrentUser().getUid();
-            b_group b_gup=new b_group(f_name,l_name,htt,wtt,agg,gender,b_gp);
+            b_group b_gup=new b_group(f_name,l_name,ht,wt,ag,gender,b_gp,uni);
             try{
                 db.child("client").child(id).setValue(b_gup);
                 startActivity(new Intent(RegisterForm.this, MainPage.class));

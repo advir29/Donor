@@ -26,4 +26,15 @@
         <item>O-</item>
         <item>Bombay type</item>
     </array>
+    <array name="b_group">
+        <item>a_positive</item>
+        <item>a_negative</item>
+        <item>b_positive</item>
+        <item>b_negative</item>
+        <item>ab_positive</item>
+        <item>ab_negative</item>
+        <item>o_positive</item>
+        <item>o_negative</item>
+        <item>Bombay type</item>
+    </array>
 </resources>
