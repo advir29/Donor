@@ -8,52 +8,75 @@
 
     <TextView
         android:id="@+id/bank_a"
-        android:layout_width="411dp"
+        android:layout_width="354dp"
         android:layout_height="59dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/add_a"
-        android:layout_width="411dp"
+        android:layout_width="363dp"
         android:layout_height="38dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="12dp"
         android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bank_a" />
 
     <TextView
         android:id="@+id/city_a"
-        android:layout_width="124dp"
+        android:layout_width="105dp"
         android:layout_height="49dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/district_a"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
+        app:layout_constraintVertical_bias="0.692" />
 
     <TextView
         android:id="@+id/district_a"
-        android:layout_width="126dp"
+        android:layout_width="99dp"
         android:layout_height="49dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="8dp"
         android:textSize="18dp"
         app:layout_constraintEnd_toStartOf="@+id/state_a"
         app:layout_constraintTop_toBottomOf="@+id/add_a" />
 
     <TextView
+        android:id="@+id/state_a"
+        android:layout_width="101dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692" />
+
+    <TextView
         android:id="@+id/units_available"
-        android:layout_width="411dp"
+        android:layout_width="338dp"
         android:layout_height="44dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -67,15 +90,4 @@
         app:layout_constraintTop_toBottomOf="@+id/district_a"
         app:layout_constraintVertical_bias="0.01" />
 
-    <TextView
-        android:id="@+id/state_a"
-        android:layout_width="133dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
 </android.support.constraint.ConstraintLayout>

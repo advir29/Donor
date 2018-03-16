@@ -195,14 +195,14 @@ public class Search extends AppCompatActivity {
             public void onClick(final View view) {
                 final String b_group=bd_group.getSelectedItem().toString();
                 final String state_name=state.getSelectedItem().toString();
-                final String district_name=state.getSelectedItem().toString();
-                final String city_name=state.getSelectedItem().toString();
+                final String district_name=district.getSelectedItem().toString();
+                final String city_name=city.getSelectedItem().toString();
                 if(state_name.equalsIgnoreCase("all")){
                     databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<record> bankN=new ArrayList<>();
                             for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
-                                ArrayList<record> bankN=new ArrayList<>();
                                 String ava=recordSnapshot.child(b_group).getValue(String.class);
                                 if(ava==null){
                                     continue;
@@ -214,9 +214,13 @@ public class Search extends AppCompatActivity {
                                             recordSnapshot.child("state_l").getValue(String.class),ava);
                                     bankN.add(rec);
                                 }
-                                adapter= new RecordAdapter(Search.this,bankN);
-                                search_result.setAdapter(adapter);
-                                startActivity(new Intent(Search.this,search_result.class));
+                            }
+                            if(bankN.size()!=0){
+                                Intent intent=new Intent(Search.this, com.example.linka.donor.search_result.class);
+                                intent.putParcelableArrayListExtra("key",bankN);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Search.this,"No records found.",Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -228,8 +232,8 @@ public class Search extends AppCompatActivity {
                     databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<record> bankN=new ArrayList<>();
                             for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
-                                ArrayList<record> bankN=new ArrayList<>();
                                 String ava=recordSnapshot.child(b_group).getValue(String.class);
                                 String disava=recordSnapshot.child("state_l").getValue(String.class);
                                 int ava_l=Integer.parseInt(ava);
@@ -239,9 +243,13 @@ public class Search extends AppCompatActivity {
                                             recordSnapshot.child("state_l").getValue(String.class),ava);
                                     bankN.add(rec);
                                 }
-                                adapter= new RecordAdapter(Search.this,bankN);
-                                search_result.setAdapter(adapter);
-                                startActivity(new Intent(Search.this,search_result.class));
+                            }
+                            if(bankN.size()!=0){
+                                Intent intent=new Intent(Search.this, com.example.linka.donor.search_result.class);
+                                intent.putParcelableArrayListExtra("key",bankN);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Search.this,"No records found.",Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -253,8 +261,8 @@ public class Search extends AppCompatActivity {
                     databaseReference.child("blood_bank").orderByChild(b_group).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<record> bankN=new ArrayList<>();
                             for(DataSnapshot recordSnapshot: dataSnapshot.getChildren()){
-                                ArrayList<record> bankN=new ArrayList<>();
                                 String ava=recordSnapshot.child(b_group).getValue(String.class);
                                 String stateava=recordSnapshot.child("state_l").getValue(String.class);
                                 String distava=recordSnapshot.child("district_l").getValue(String.class);
@@ -264,10 +272,14 @@ public class Search extends AppCompatActivity {
                                             recordSnapshot.child("city_l").getValue(String.class),recordSnapshot.child("district_l").getValue(String.class),
                                             recordSnapshot.child("state_l").getValue(String.class),ava);
                                     bankN.add(rec);
-                                    adapter= new RecordAdapter(Search.this,bankN);
-                                    search_result.setAdapter(adapter);
-                                    startActivity(new Intent(Search.this,search_result.class));
                                 }
+                            }
+                            if(bankN.size()!=0){
+                                Intent intent=new Intent(Search.this, com.example.linka.donor.search_result.class);
+                                intent.putParcelableArrayListExtra("key",bankN);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Search.this,"No records found.",Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -293,15 +305,21 @@ public class Search extends AppCompatActivity {
                                     bankN.add(rec);
                                 }
                             }
-                            adapter= new RecordAdapter(Search.this,bankN);
-                            search_result.setAdapter(adapter);
-                            startActivity(new Intent(Search.this,search_result.class));
+                            if(bankN.size()!=0){
+                                Intent intent=new Intent(Search.this, com.example.linka.donor.search_result.class);
+                                intent.putParcelableArrayListExtra("key",bankN);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Search.this,"No records found.",Toast.LENGTH_SHORT).show();
+                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
                     });
+                } else {
+                    Toast.makeText(Search.this,"No records found.",Toast.LENGTH_SHORT).show();
                 }
             }
 
