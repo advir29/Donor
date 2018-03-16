@@ -12,12 +12,11 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/bName"
             android:layout_width="237dp"
             android:layout_height="216dp"
-            android:text="Welcome ..blood bank name.."
-            android:textSize="40dp"
             android:textAlignment="center"
+            android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

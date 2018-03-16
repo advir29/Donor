@@ -8,20 +8,57 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class bank_checkInventory extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
     NavigationView navigation;
+    ListView inven_view;
+    FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_check_inventory);
         startDrawer();
-
+        mAuth = FirebaseAuth.getInstance();
+        final String idN=mAuth.getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        inven_view=findViewById(R.id.inven_view);
+        databaseReference.child("blood_bank").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> inv=new ArrayList<>();
+                inv.add("  ");
+                inv.add("A+             :      "+dataSnapshot.child(idN).child("a_positive").getValue(String.class));
+                inv.add("A-             :      "+dataSnapshot.child(idN).child("a_negative").getValue(String.class));
+                inv.add("B+             :      "+dataSnapshot.child(idN).child("b_positive").getValue(String.class));
+                inv.add("B-             :      "+dataSnapshot.child(idN).child("b_negative").getValue(String.class));
+                inv.add("AB+            :      "+dataSnapshot.child(idN).child("ab_positive").getValue(String.class));
+                inv.add("AB-            :      "+dataSnapshot.child(idN).child("ab_negative").getValue(String.class));
+                inv.add("O+             :      "+dataSnapshot.child(idN).child("o_positive").getValue(String.class));
+                inv.add("O-             :      "+dataSnapshot.child(idN).child("o_negative").getValue(String.class));
+                inv.add("Bombay Type    :      "+dataSnapshot.child(idN).child("bombay").getValue(String.class));
+                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<>(bank_checkInventory.this,R.layout.list_pop,inv);
+                inven_view.setAdapter(arrayAdapter);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     private void startDrawer() {

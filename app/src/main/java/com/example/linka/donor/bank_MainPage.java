@@ -8,13 +8,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class bank_MainPage extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
     NavigationView navigation;
+    FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
+    TextView bName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,10 @@ public class bank_MainPage extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigation = findViewById(R.id.navigation2);
+        mAuth = FirebaseAuth.getInstance();
+        final String idN=mAuth.getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        bName=findViewById(R.id.bName);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -57,6 +70,16 @@ public class bank_MainPage extends AppCompatActivity {
                         startActivity(in);break;
                     }}
                 return false;
+            }
+        });
+        databaseReference.child("blood_bank").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String bNameU = dataSnapshot.child(idN).child("bname").getValue(String.class);
+                bName.setText("Welcome\n"+bNameU);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
