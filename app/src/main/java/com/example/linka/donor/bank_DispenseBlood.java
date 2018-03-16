@@ -1,6 +1,7 @@
 package com.example.linka.donor;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -8,18 +9,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import net.glxn.qrgen.android.QRCode;
 
 public class bank_DispenseBlood extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
     NavigationView navigation;
+    FirebaseAuth mAuth;
+    ImageView bank_qr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank__dispense_blood);
+        mAuth = FirebaseAuth.getInstance();
+        final String idN=mAuth.getCurrentUser().getUid();
+        bank_qr=findViewById(R.id.bank_dispQr);
+        Bitmap qr= QRCode.from(idN).bitmap();
+        bank_qr.setImageBitmap(qr);
         startDrawer();
     }
     private void startDrawer() {

@@ -81,8 +81,8 @@ public class Login extends AppCompatActivity {
                                                                         layout.setVisibility(View.INVISIBLE);
                                                                         Toast.makeText(Login.this, "Records not found. Complete registration.", Toast.LENGTH_SHORT).show();
                                                                         String em = mAuth.getCurrentUser().getEmail();
-                                                                        String tem = em.substring(em.length() - 8);
-                                                                        if (tem.equalsIgnoreCase("bank.com")) {
+                                                                        String tem = em.substring(em.length() - 9);
+                                                                        if (tem.equalsIgnoreCase("@bank.com")) {
                                                                             layout.setVisibility(View.INVISIBLE);
                                                                             startActivity(new Intent(Login.this, bank_register.class));
                                                                         } else {

@@ -76,7 +76,7 @@ public class Transfer extends AppCompatActivity {
                 return false;
             }
         });
-        tranferBtn.setOnClickListener(new View.OnClickListener() {
+        /*tranferBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String tf1=ttf1.getText().toString();
@@ -113,7 +113,7 @@ public class Transfer extends AppCompatActivity {
                     Toast.makeText(Transfer.this,"Please fill all fields.",Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
     }
 
     @Override

@@ -43,22 +43,27 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 email=emailTxt.getText().toString().trim();
                 password=pwTxt.getText().toString().trim();
-                try{
-                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                startActivity(new Intent(Register.this, RegisterForm.class));
-                            } else {
-                                Toast.makeText(Register.this, "Registration failed.", Toast.LENGTH_SHORT).show();
-                                emailTxt.setText("");
-                                pwTxt.setText("");
-                                emailTxt.requestFocus();
+                String tem = email.substring(email.length() - 9);
+                if (tem.equalsIgnoreCase("@bank.com")){
+                    Toast.makeText(Register.this,"Domain name unavailable.",Toast.LENGTH_SHORT).show();
+                }else{
+                    try{
+                        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    startActivity(new Intent(Register.this, RegisterForm.class));
+                                } else {
+                                    Toast.makeText(Register.this, "Registration failed.", Toast.LENGTH_SHORT).show();
+                                    emailTxt.setText("");
+                                    pwTxt.setText("");
+                                    emailTxt.requestFocus();
+                                }
                             }
-                        }
-                    });
-                }catch(Exception e) {
-                    Toast.makeText(Register.this, "Enter Valid Credentials.", Toast.LENGTH_SHORT).show();
+                        });
+                    }catch(Exception e) {
+                        Toast.makeText(Register.this, "Enter Valid Credentials.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

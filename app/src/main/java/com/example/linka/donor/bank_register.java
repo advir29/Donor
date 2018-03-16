@@ -58,4 +58,9 @@ public class bank_register extends AppCompatActivity {
             Toast.makeText(this, "Please fill all the required fields.",Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

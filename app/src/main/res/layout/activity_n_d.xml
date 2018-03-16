@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/qr" />
+            app:srcCompat="@mipmap/qr_scan" />
 
         <TextView
             android:id="@+id/textView14"
@@ -31,7 +31,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:text="Share this QR with Donation Incharge."
+            android:text="Scan QR with Donation Incharge."
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
